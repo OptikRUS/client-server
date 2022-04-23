@@ -17,4 +17,4 @@ for i in words:
         bytes_string = bytes(i, 'ascii')
         print(bytes_string, type(bytes_string), len(bytes_string))
     except UnicodeEncodeError as e:
-        print(e)
+        print(i.encode())

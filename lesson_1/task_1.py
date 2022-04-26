@@ -21,10 +21,12 @@
 """
 
 words = ['разработка', 'сокет', 'декоратор']
+u_words = ['\u0440\u0430\u0437\u0440\u0430\u0431\u043e\u0442\u043a\u0430',
+           '\u0441\u043e\u043a\u0435\u0442',
+           '\u0434\u0435\u043a\u043e\u0440\u0430\u0442\u043e\u0440']
 
-for i in words:
-    byte_string = i.encode()
-    unicode_string = str(i.encode())[1:]
-    print(i, type(i))
-    print(byte_string, type(byte_string))
-    print(unicode_string, type(unicode_string))
+for word in words:
+    print(word, type(word))
+
+for u_word in u_words:
+    print(u_word, type(u_word))

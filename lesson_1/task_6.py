@@ -27,6 +27,11 @@ from chardet import detect
 
 
 with open('test_file.txt', 'rb') as f:
-    for line in f.readlines():
-        result = detect(line)
-        print(line.decode(result['encoding']), end='')
+    data = f.read()
+    decoded_data = data.decode(detect(data)['encoding'])
+
+with open('test_file.txt', 'w', encoding='utf-8') as f:
+    f.write(decoded_data)
+
+with open('test_file.txt', encoding='utf-8') as f:
+    print(f.read())

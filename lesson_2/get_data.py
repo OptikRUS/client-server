@@ -18,9 +18,8 @@ def get_data(files_list=['info_1.txt', 'info_2.txt', 'info_3.txt']):
             os_code_list.append(re.findall(r'\Код продукта:\s+(.+)\b', file)[0])
             os_type_list.append(re.findall(r'\Тип системы:\s+(.+)\b', file)[0])
 
-    main_data.append(os_prod_list)
-    main_data.append(os_name_list)
-    main_data.append(os_code_list)
-    main_data.append(os_type_list)
+    for i in range(3):
+        data_list = [os_prod_list[i], os_name_list[i], os_code_list[i], os_type_list[i]]
+        main_data.append(data_list)
 
     return main_data

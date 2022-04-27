@@ -2,7 +2,7 @@ import re
 from decoding_file import decoding_file
 
 
-def get_data(files_list):
+def get_data(files_list=['info_1.txt', 'info_2.txt', 'info_3.txt']):
     os_prod_list = []
     os_name_list = []
     os_code_list = []

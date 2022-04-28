@@ -1,6 +1,6 @@
 import csv
 
-from get_data import get_data
+from lesson_2.task_1.get_data import get_data
 
 
 def write_to_csv(filename):

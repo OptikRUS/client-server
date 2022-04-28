@@ -1,8 +1,8 @@
 import re
-from decoding_file import decoding_file
+from lesson_2.decoding_file import decoding_file
 
 
-def get_data(files_list=['info_1.txt', 'info_2.txt', 'info_3.txt']):
+def get_data(files_list=['task_1/info_1.txt', 'task_1/info_2.txt', 'task_1/info_3.txt']):
     os_prod_list = []
     os_name_list = []
     os_code_list = []

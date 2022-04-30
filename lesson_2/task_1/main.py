@@ -1,8 +1,10 @@
 import re
-from lesson_2.decoding_file import decoding_file
+import csv
+
+from decoding_file import decoding_file
 
 
-def get_data(files_list=['task_1/info_1.txt', 'task_1/info_2.txt', 'task_1/info_3.txt']):
+def get_data(files_list=['info_1.txt', 'info_2.txt', 'info_3.txt']):
     os_prod_list = []
     os_name_list = []
     os_code_list = []
@@ -19,7 +21,17 @@ def get_data(files_list=['task_1/info_1.txt', 'task_1/info_2.txt', 'task_1/info_
             os_type_list.append(re.findall(r'\Тип системы:\s+(.+)\b', file)[0])
 
     for i in range(3):
-        data_list = [os_prod_list[i], os_name_list[i], os_code_list[i], os_type_list[i]]
+        data_list = [i + 1, os_prod_list[i], os_name_list[i], os_code_list[i], os_type_list[i]]
         main_data.append(data_list)
 
     return main_data
+
+
+def write_to_csv(filename):
+    with open(filename, 'w', encoding='utf-8') as f:
+        f_n_writer = csv.writer(f, quoting=csv.QUOTE_NONNUMERIC)
+        for row in get_data():
+            f_n_writer.writerow(row)
+
+
+write_to_csv('test.csv')

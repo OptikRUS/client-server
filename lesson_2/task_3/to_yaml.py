@@ -17,7 +17,7 @@ data = {
     }
 }
 
-with open('file.yaml', 'w') as f:
+with open('file.yaml', 'w', encoding='utf-8') as f:
     yaml.dump(data, f, default_style=False, allow_unicode=True)
 
 with open('file.yaml', 'r') as f:

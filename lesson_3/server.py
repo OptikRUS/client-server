@@ -2,8 +2,8 @@ import json
 import sys
 from socket import socket, AF_INET, SOCK_STREAM
 
-from common.consts import DEFAULT_PORT, DEFAULT_IP_ADDRESS, MAX_CONNECTIONS
 from common.utils import get_message, send_message, valid_message
+from common.consts import DEFAULT_PORT, MAX_CONNECTIONS
 
 
 def main():
@@ -16,15 +16,15 @@ def main():
             raise ValueError
     except IndexError:
         print("Параметры командной строки: -p <port>")
+        sys.exit(1)
     except ValueError:
         print("Значение <port> в диапазоне от 1024 до 65635")
-        sys.exit(1)
 
     try:
         if '-a' in sys.argv:
             ip_address = sys.argv[sys.argv.index('-a') + 1]
         else:
-            ip_address = DEFAULT_IP_ADDRESS
+            ip_address = ''
     except ValueError:
         print("Параметры командной строки: -a <address>")
         sys.exit(1)

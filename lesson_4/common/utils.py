@@ -35,7 +35,7 @@ def valid_answer(message):
         if message[RESPONSE] == 200:
             return "200 : OK"
         return f"400 : {message[ERROR]}"
-    return ValueError
+    raise ValueError
 
 
 def create_presence(account_name="Guest"):

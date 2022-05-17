@@ -119,7 +119,7 @@ MANIFEST
 *.manifest
 *.spec
 
-# Installer logging
+# Installer loger
 pip-log.txt
 pip-delete-this-directory.txt
 

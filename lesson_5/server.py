@@ -5,7 +5,7 @@ from socket import socket, AF_INET, SOCK_STREAM
 
 from common.utils import get_message, send_message, valid_message
 from common.consts import DEFAULT_PORT, MAX_CONNECTIONS
-from logging.config import config_server_log
+from loger.config import config_server_log
 
 SERVER_LOGGER = logging.getLogger('server')
 

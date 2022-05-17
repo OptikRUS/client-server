@@ -5,7 +5,7 @@ from socket import socket, AF_INET, SOCK_STREAM
 
 from common.consts import DEFAULT_IP_ADDRESS, DEFAULT_PORT
 from common.utils import create_presence, valid_answer, get_message, send_message
-from logs.config import config_client_log
+from logging.config import config_client_log
 
 CLIENT_LOGGER = logging.getLogger('client')
 

@@ -7,7 +7,7 @@ from common.consts import LOGGING_LEVEL
 
 FORMATTER = logging.Formatter("%(asctime)s %(levelname)-10s %(filename)-23s %(message)s")
 
-PATH = os.path.join(os.path.dirname(__file__), "client.log")
+PATH = os.path.join(os.path.dirname(__file__), "logs/client.log")
 
 STREAM_HANDLER = logging.StreamHandler(sys.stderr)
 STREAM_HANDLER.setFormatter(FORMATTER)

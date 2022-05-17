@@ -17,12 +17,12 @@ def main():
         if not 1024 < server_port < 65535:
             CLIENT_LOGGER.critical(f"Неверный номер порта: {server_port} Значение <port> в диапазоне от 1024 до 65635")
         CLIENT_LOGGER.info(f"Запущен клиент с адресом {server_address} и портом {server_port}")
+        sys.exit(1)
 
     except IndexError:
         server_address = DEFAULT_IP_ADDRESS
         server_port = DEFAULT_PORT
         CLIENT_LOGGER.debug(f"Будут использованы стандартные адрес {server_address} и порт {server_port}")
-        sys.exit(1)
 
     CLIENT_SOCKET = socket(AF_INET, SOCK_STREAM)
     CLIENT_SOCKET.connect((server_address, server_port))
@@ -33,7 +33,7 @@ def main():
         answer = valid_answer(get_message(CLIENT_SOCKET))
         CLIENT_LOGGER.info(f'Ответ от сервера {answer}')
     except (ValueError, json.JSONDecodeError):
-        CLIENT_LOGGER.critical("Не удалось декодировать сообщение")
+        CLIENT_LOGGER.error("Не удалось декодировать сообщение")
 
 
 if __name__ == '__main__':

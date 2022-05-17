@@ -1,8 +1,8 @@
 from unittest import TestCase
 import json
 
-from lesson_4.common.utils import valid_message, create_presence, valid_answer, get_message, send_message
-from lesson_4.common.consts import ACTION, ERROR, PRESENCE, TIME, USER, RESPONSE, ACCOUNT_NAME, ENCODING
+from ..common.utils import valid_message, create_presence, valid_answer, get_message, send_message
+from ..common.consts import ACTION, ERROR, PRESENCE, TIME, USER, RESPONSE, ACCOUNT_NAME, ENCODING
 
 
 class TestSocket:

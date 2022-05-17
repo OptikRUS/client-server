@@ -1,7 +1,7 @@
 import json
 import time
 
-from .consts import ENCODING, MAX_PACKAGE_LENGTH, ACTION, PRESENCE, TIME, USER, ACCOUNT_NAME, RESPONSE, ERROR
+from consts import ENCODING, MAX_PACKAGE_LENGTH, ACTION, PRESENCE, TIME, USER, ACCOUNT_NAME, RESPONSE, ERROR
 
 
 def get_message(client):

@@ -6,7 +6,7 @@ import logging.handlers
 from common.consts import LOGGING_LEVEL
 
 
-FORMATTER = logging.Formatter("%(asctime)s %(levelname)-5s %(filename)s %(message)s")
+FORMATTER = logging.Formatter("%(asctime)s %(levelname)-5s %(name)s %(message)s")
 
 PATH = os.path.join(os.path.dirname(__file__), "logs/server.log")
 

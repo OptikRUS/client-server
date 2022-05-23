@@ -5,7 +5,7 @@ import sys
 from common.consts import LOGGING_LEVEL
 
 
-FORMATTER = logging.Formatter("%(asctime)s %(levelname)-10s %(filename)-23s %(message)s")
+FORMATTER = logging.Formatter("%(asctime)s %(levelname)-10s %(name)-23s %(message)s")
 
 PATH = os.path.join(os.path.dirname(__file__), "logs/client.log")
 

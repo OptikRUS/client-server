@@ -5,6 +5,7 @@
       <sourceFolder url="file://$MODULE_DIR$" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lesson_5" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/lesson_6" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/lesson_7" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/client-server-venv" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.8 (client-server)" jdkType="Python SDK" />

@@ -1,6 +1,6 @@
+import inspect
 import sys
 import logging
-import inspect
 
 
 def log(func):
@@ -11,8 +11,7 @@ def log(func):
 
     def wrapper(*args, **kwargs):
         res = func(*args, **kwargs)
-        LOGGER.debug(f'Функция {func.__name__} вызвана из модуля {func.__module__.split(".")[-1]}')
-        inspect.getfile(func)
+        LOGGER.debug(f'Функция {func.__name__} вызвана из модуля {func.__module__.split(".")[-1]}', stacklevel=2)
         return res
 
     return wrapper

@@ -8,11 +8,38 @@ from socket import socket, AF_INET, SOCK_STREAM
 from common.consts import DEFAULT_IP_ADDRESS, DEFAULT_PORT, RESPONSE, ERROR, ACTION, MESSAGE, SENDER, MESSAGE_TEXT, \
     PRESENCE, TIME, USER, ACCOUNT_NAME
 from common.errors import ServerError, ReqFieldMissingError
-from common.utils import get_message, send_message, create_message
+from common.utils import get_message, send_message
+
 from loger.log_decorators import log
 from loger.config import config_client_log
 
 CLIENT_LOGGER = logging.getLogger('client')
+
+
+@log
+def message_from_server(message):
+    if ACTION in message and message[ACTION] == MESSAGE and SENDER in message and MESSAGE_TEXT in message:
+        print(f'Получено сообщение от пользователя {message[SENDER]}:\n{message[MESSAGE_TEXT].upper()}')
+        CLIENT_LOGGER.info(f'Получено сообщение от пользователя {message[SENDER]}:\n{message[MESSAGE_TEXT].upper()}')
+    else:
+        CLIENT_LOGGER.error(f'Получено некорректное сообщение с сервера: {message}')
+
+
+@log
+def create_message(sock, account_name='Guest'):
+    message = input('Введите сообщение для отправки или \'!!!\' для завершения работы: ')
+    if message == '!!!':
+        sock.close()
+        CLIENT_LOGGER.info('Завершение работы по команде пользователя.')
+        sys.exit(0)
+    message_dict = {
+        ACTION: MESSAGE,
+        TIME: time.time(),
+        ACCOUNT_NAME: account_name,
+        MESSAGE_TEXT: message
+    }
+    CLIENT_LOGGER.debug(f'Сформирован словарь сообщения: {message_dict}')
+    return message_dict
 
 
 @log
@@ -29,23 +56,14 @@ def create_presence(account_name='Guest'):
 
 
 @log
-def message_from_server(message):
-    if ACTION in message and message[ACTION] == MESSAGE and SENDER in message and MESSAGE_TEXT in message:
-        print(f'Получено сообщение от пользователя {message[SENDER]}:\n{message[MESSAGE_TEXT]}')
-        CLIENT_LOGGER.info(f'Получено сообщение от пользователя {message[SENDER]}:\n{message[MESSAGE_TEXT]}')
-    else:
-        CLIENT_LOGGER.error(f'Получено некорректное сообщение с сервера: {message}')
-
-
-@log
 def process_response_ans(message):
     CLIENT_LOGGER.debug(f'Разбор приветственного сообщения от сервера: {message}')
     if RESPONSE in message:
         if message[RESPONSE] == 200:
             return '200 : OK'
         elif message[RESPONSE] == 400:
-            raise Exception(f'400 : {message[ERROR]}')
-    raise ValueError(RESPONSE)
+            raise ServerError(f'400 : {message[ERROR]}')
+    raise ReqFieldMissingError(RESPONSE)
 
 
 @log
@@ -66,8 +84,7 @@ def arg_parser():
         sys.exit(1)
 
     if client_mode not in ('listen', 'send'):
-        CLIENT_LOGGER.critical(f'Указан недопустимый режим работы {client_mode}, '
-                               f'допустимые режимы: listen , send')
+        CLIENT_LOGGER.critical(f'Указан недопустимый режим работы "{client_mode}", допустимые режимы: listen , send')
         sys.exit(1)
 
     return server_address, server_port, client_mode
@@ -76,8 +93,8 @@ def arg_parser():
 def main():
     server_address, server_port, client_mode = arg_parser()
 
-    CLIENT_LOGGER.info(f'Запущен клиент с парамертами: адрес сервера: {server_address}, порт: {server_port}, '
-                       f'режим работы: {client_mode}')
+    CLIENT_LOGGER.info(f'Запущен клиент с парамертами: адрес сервера: {server_address}, '
+                       f'порт: {server_port}, режим работы: {client_mode}')
 
     try:
         CLIENT_SOCKET = socket(AF_INET, SOCK_STREAM)
@@ -96,7 +113,7 @@ def main():
         sys.exit(1)
     except ConnectionRefusedError:
         CLIENT_LOGGER.critical(
-            f'Не удалось подключиться к серверу {server_address}:{server_port}, '
+            f'Не удалось подключиться к серверу {server_address}:{server_port},'
             f'конечный компьютер отверг запрос на подключение.')
         sys.exit(1)
     else:
